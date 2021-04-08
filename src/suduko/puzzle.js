@@ -1,0 +1,56 @@
+
+import sudoku from 'sudoku';
+
+/*
+Generate sudoku puzzle 
+
+Suduko board to be used structure: {tile: [
+  {
+    index: 0,
+    row: 0,
+    col: 0,
+    value: 1,
+    readonly: true
+  }
+]}
+*/
+const Puzzle = {
+
+    generatePuzzle(){
+        const unsolvedPuzzle = sudoku.makepuzzle().map(element => (
+          element !== null ? element +1 : null
+        ));
+        const board = []
+        for(let i=0; i<9; i++){
+          for(let j = 0; j<9; j++){
+            const value = unsolvedPuzzle[i * 9 + j]
+            const tile = {
+              index: i* 9 + j,
+              row: i,
+              col: j, 
+              value: value,
+              readonly: value !== null
+            };
+            board.push(tile)
+          }
+        }
+        // console.log(board)
+        return board;
+        // solvepuzzle(puzzle)
+      },
+    
+    
+      solvePuzzle(board){
+        let puzzle = []
+        board.map((tile) =>
+            puzzle.push(tile.value !== null ? tile.value -1 : null)
+        )
+        let solved = sudoku.solvepuzzle(puzzle).map(element => (
+            element + 1
+          ));
+        return solved
+      }
+    
+}
+
+export default Puzzle

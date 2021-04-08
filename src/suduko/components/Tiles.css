@@ -1,0 +1,10 @@
+.tiles {
+  border: 1px solid grey;
+  text-align: center;
+  width: 4rem;
+  height: 4rem;
+  font-size: 3rem;
+}
+.tiles[readonly] {
+  background-color: antiquewhite;
+}
