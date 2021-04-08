@@ -8,3 +8,15 @@
 .tiles[readonly] {
   background-color: antiquewhite;
 }
+.col-2 {
+  border-right: solid rgb(0, 0, 0);
+}
+.col-5 {
+  border-right: solid rgb(0, 0, 0);
+}
+.row-2 {
+  border-bottom: solid rgb(0, 0, 0);
+}
+.row-5 {
+  border-bottom: solid rgb(0, 0, 0);
+}
