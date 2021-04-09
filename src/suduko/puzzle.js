@@ -29,6 +29,7 @@ const Puzzle = {
               row: i,
               col: j, 
               value: value,
+              valid: value ? true : 'empty',
               readonly: value !== null
             };
             board.push(tile)

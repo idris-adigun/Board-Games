@@ -5,9 +5,27 @@
   height: 4rem;
   font-size: 3rem;
 }
-.tiles[readonly] {
+/* .state-false-filled {
+  background-color: rgb(248, 195, 195);
+} */
+
+/* Pre filled state */
+.readonly-filled-true {
   background-color: antiquewhite;
+  color: black;
 }
+
+/* Filled but not valid */
+.not-readonly-filled-false {
+  background-color: rgb(248, 195, 195);
+}
+.not-readonly-filled-true {
+  background-color: rgb(206, 248, 195);
+}
+/* .tiles[readonly] {
+  background-color: antiquewhite;
+  color: black;
+} */
 .col-2 {
   border-right: solid rgb(0, 0, 0);
 }
