@@ -1,0 +1,6 @@
+.sudoku {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 0px 10px;
+}

@@ -38,3 +38,23 @@
 .row-5 {
   border-bottom: solid rgb(0, 0, 0);
 }
+
+@media only screen and (max-width: 600px) {
+  .tiles {
+    border: 1px solid grey;
+    text-align: center;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 455px) {
+  .tiles {
+    border: 1px solid grey;
+    text-align: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+}

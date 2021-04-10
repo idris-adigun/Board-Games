@@ -1,0 +1,19 @@
+.sidebar {
+  width: 150px;
+  background-color: rgb(109, 109, 109);
+  color: white;
+  height: 90vh;
+  margin-right: 10px;
+  padding: 10px 10px;
+}
+.nav {
+  padding: 0;
+  list-style: none;
+}
+
+.nav-list {
+  padding: 10px 10px;
+}
+.nav-list .btn {
+  color: white;
+}

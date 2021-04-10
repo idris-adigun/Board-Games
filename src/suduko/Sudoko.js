@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import './sudoku.css'
 import Board from './components/Board'
 import Puzzle from './puzzle'
+import Button from '@material-ui/core/Button';
 
 function Sudoko() {
 
@@ -25,7 +27,7 @@ function Sudoko() {
 
     // Validate if the submitted puzzle is correct
    const validate = () => {
-       const newBoard = board;
+        const newBoard = board;
         // Check if the value of the board correspond to solved puzzle then set valid value
         solved.forEach((value, i) => {
             newBoard[i].value === value ? 
@@ -42,13 +44,12 @@ function Sudoko() {
 
 
     return (
-        <div>
-            <h2>Sudoku</h2>
-            <Board board={board} changeTile={changeTile}/>
-            <div style={{textAlign: "center"}}>
-                <button onClick={validate}>Validate Puzzle</button><br></br>
+            <div className="sudoku">
+                        <Board board={board} changeTile={changeTile}/>
+                        <div style={{textAlign: "center"}}>
+                            <Button onClick={validate}>Validate</Button><br></br>
+                        </div>
             </div>
-        </div>
     )
 }
 

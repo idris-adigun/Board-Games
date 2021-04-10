@@ -16,3 +16,6 @@ input[type="text"] {
   -moz-appearance: textfield;
   padding: 0;
 }
+* {
+  font-family: "Montserrat", sans-serif;
+}
