@@ -38,6 +38,7 @@ function Sudoko() {
         setSolved(
            solved => solved =[...Puzzle.solvePuzzle(newBoard)] 
         )
+        //restart time
     }
 
     const clearBoard = () => 
@@ -72,8 +73,8 @@ function Sudoko() {
             }
         });
         setCorrectTileCount(prevCount => prevCount = count)
-        if(correctTileCount === 81){
-            console.log('Game Won')
+        if(correctTileCount === 25){
+            console.log('Game Won in', time)
         }
     }
     const getTimer = (seonds) =>{
@@ -83,16 +84,14 @@ function Sudoko() {
     
     return (
             <div className="sudoku">
-                <Timer getTimer={getTimer}/>
+                {/* <Timer getTimer={getTimer}/> */}
                 <Board board={board} changeTile={changeTile}/>
-                <div>{correctTileCount} valid tiles</div>
-                <div>{correctTileCount === 81 ? "Game Won" : ''}</div>
                 <div className="controls">
                     <Button onClick={validate}  variant="contained" color="primary">Verify</Button>
                     <Button variant="contained" onClick={clearBoard} color="primary">Clear</Button>
                     <Button variant="contained" onClick={restart} color="primary">Restart</Button>
                 </div>
-                {time}
+                {/* {time} */}
             </div>
     )
 }
