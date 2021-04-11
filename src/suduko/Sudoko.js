@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import './sudoku.css'
-import Board from './components/Board'
-import Puzzle from './puzzle'
+import './sudoku.css';
+import Timer from './components/Timer';
+import Board from './components/Board';
+import Puzzle from './puzzle';
 import Button from '@material-ui/core/Button';
 
 function Sudoko() {
-
     const [board, setBoard] = useState(() => Puzzle.generatePuzzle());
     const [correctTileCount, setCorrectTileCount] = useState(0);
     const [solved, setSolved] = useState(() => Puzzle.solvePuzzle(board));
+    const [time, setTime] = useState(0)
+
     useEffect(() => {
             setCorrectTileCount(correctTileCount => correctTileCount = correctTileCount)
-    }, [correctTileCount])
-
+    }, [correctTileCount]);
+    
     const changeTile = (index, value) =>{
         try{
             value = parseInt(value);
@@ -70,22 +72,22 @@ function Sudoko() {
             }
         });
         setCorrectTileCount(prevCount => prevCount = count)
-        // console.log(correctTileCount)
-        // return count;
     }
-
-
+    const getTimer = (seonds) =>{
+        setTime(time => time = seonds)
+        console.log(time)
+    }
     return (
             <div className="sudoku">
-                        <Board board={board} changeTile={changeTile}/>
-                        <p>{correctTileCount} valid tiles</p>
-                        <p>{correctTileCount === 81 ? "Game Won" : ''}</p>
-                        <div className="controls">
-                            <Button onClick={validate}  variant="contained" color="primary">Verify</Button>
-                            <Button variant="contained" color="primary">Pause</Button>
-                            <Button variant="contained" onClick={clearBoard} color="primary">Clear</Button>
-                            <Button variant="contained" onClick={restart} color="primary">Restart</Button>
-                        </div>
+                <Timer getTimer={getTimer}/>
+                <Board board={board} changeTile={changeTile}/>
+                <div>{correctTileCount} valid tiles</div>
+                <div>{correctTileCount === 81 ? "Game Won" : ''}</div>
+                <div className="controls">
+                    <Button onClick={validate}  variant="contained" color="primary">Verify</Button>
+                    <Button variant="contained" onClick={clearBoard} color="primary">Clear</Button>
+                    <Button variant="contained" onClick={restart} color="primary">Restart</Button>
+                </div>
             </div>
     )
 }
