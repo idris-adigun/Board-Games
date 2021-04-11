@@ -19,7 +19,6 @@ function App() {
 
   const toggleSidebar = () => {
         setSidebar(previousState => previousState = !previousState)
-        console.log(sidebar)
   }
   return (
     <div className="App">

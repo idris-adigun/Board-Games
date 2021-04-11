@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './sudoku.css';
 import Timer from './components/Timer';
 import Board from './components/Board';
@@ -11,9 +11,9 @@ function Sudoko() {
     const [solved, setSolved] = useState(() => Puzzle.solvePuzzle(board));
     const [time, setTime] = useState(0)
 
-    useEffect(() => {
-            setCorrectTileCount(correctTileCount => correctTileCount = correctTileCount)
-    }, [correctTileCount]);
+    // useEffect(() => {
+    //         setCorrectTileCount(correctTileCount => correctTileCount = correctTileCount)
+    // }, [correctTileCount]);
     
     const changeTile = (index, value) =>{
         try{
@@ -72,11 +72,15 @@ function Sudoko() {
             }
         });
         setCorrectTileCount(prevCount => prevCount = count)
+        if(correctTileCount === 81){
+            console.log('Game Won')
+        }
     }
     const getTimer = (seonds) =>{
         setTime(time => time = seonds)
-        console.log(time)
+        // console.log(time)
     }
+    
     return (
             <div className="sudoku">
                 <Timer getTimer={getTimer}/>
@@ -88,6 +92,7 @@ function Sudoko() {
                     <Button variant="contained" onClick={clearBoard} color="primary">Clear</Button>
                     <Button variant="contained" onClick={restart} color="primary">Restart</Button>
                 </div>
+                {time}
             </div>
     )
 }
