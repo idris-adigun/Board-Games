@@ -51,7 +51,7 @@
 
 @media only screen and (max-width: 455px) {
   .tiles {
-    border: 1px solid grey;
+    border: 1.9px solid grey;
     text-align: center;
     width: 2rem;
     height: 2rem;

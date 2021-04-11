@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './sudoku.css'
 import Board from './components/Board'
 import Puzzle from './puzzle'
@@ -7,7 +7,11 @@ import Button from '@material-ui/core/Button';
 function Sudoko() {
 
     const [board, setBoard] = useState(() => Puzzle.generatePuzzle());
+    const [correctTileCount, setCorrectTileCount] = useState(0);
     const [solved, setSolved] = useState(() => Puzzle.solvePuzzle(board));
+    useEffect(() => {
+            setCorrectTileCount(correctTileCount => correctTileCount = correctTileCount)
+    }, [correctTileCount])
 
     const changeTile = (index, value) =>{
         try{
@@ -53,17 +57,31 @@ function Sudoko() {
                     newBoard[i] = {...newBoard[i], valid: 'empty'}
                 )
         })
-
+        countValidTile(newBoard);
         //Set the board to the new board 
         setBoard(board => board = [...newBoard])
+    }
+
+    const countValidTile = (newBoard) =>{
+        let count = 0;
+        newBoard.forEach(element => {
+            if(element.valid === true){
+                count++
+            }
+        });
+        setCorrectTileCount(prevCount => prevCount = count)
+        // console.log(correctTileCount)
+        // return count;
     }
 
 
     return (
             <div className="sudoku">
                         <Board board={board} changeTile={changeTile}/>
+                        <p>{correctTileCount} valid tiles</p>
+                        <p>{correctTileCount === 81 ? "Game Won" : ''}</p>
                         <div className="controls">
-                            <Button onClick={validate}  variant="contained" color="primary">Check Progress</Button>
+                            <Button onClick={validate}  variant="contained" color="primary">Verify</Button>
                             <Button variant="contained" color="primary">Pause</Button>
                             <Button variant="contained" onClick={clearBoard} color="primary">Clear</Button>
                             <Button variant="contained" onClick={restart} color="primary">Restart</Button>
