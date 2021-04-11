@@ -1,11 +1,20 @@
 import './App.css';
-import React, { useState } from 'react';
-import Sudoko from './suduko/Sudoko';
+import React, { useState, lazy, Suspense } from 'react';
+// import Sudoku from './Sudoku/Sudoku';
+// import Home from './Home/Home';
+// import Hangman from './Hangman/Hangman'
 import Sidebar from './components/Sidebar';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
+
+
+const Home = lazy(() => import('./Home/Home'));
+const Hangman = lazy(() => import('./Hangman/Hangman'));
+const Sudoku = lazy(() => import('./Sudoku/Sudoku'));
 
 function App() {
   const [sidebar, setSidebar] = useState(true);
@@ -21,23 +30,29 @@ function App() {
         setSidebar(previousState => previousState = !previousState)
   }
   return (
-    <div className="App">
-      <AppBar position="static">
-        <Toolbar> 
-          <IconButton edge="start" color="inherit" aria-label="menu"  onClick={toggleSidebar}>
-              <MenuIcon/>
-            </IconButton>
-        </Toolbar>
-      </AppBar>
-      <div className="container">
-        <div className={sidebar ? "show-sidebar" : "hide-sidebar"}>
-          <Sidebar/>
+    <Router>
+      <Suspense fallback="Loading...">
+        <div className="App">
+          <AppBar position="static">
+            <Toolbar> 
+              <IconButton edge="start" color="inherit" aria-label="menu"  onClick={toggleSidebar}>
+                  <MenuIcon/>
+                </IconButton>
+            </Toolbar>
+          </AppBar>
+          <div className="container">
+            <div className={sidebar ? "show-sidebar" : "hide-sidebar"}>
+              <Sidebar/>
+            </div>
+            <div className="game">
+              <Route path="/" exact component={Home}></Route>
+              <Route path="/Sudoku" component={Sudoku}></Route>
+              <Route path="/Hangman" component={Hangman}></Route>
+            </div>
+          </div>
         </div>
-        <div className="sudoku">
-          <Sudoko/>
-        </div>
-      </div>
-    </div>
+      </Suspense>
+    </Router>
   );
 }
 

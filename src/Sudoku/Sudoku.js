@@ -5,7 +5,7 @@ import Board from './components/Board';
 import Puzzle from './puzzle';
 import Button from '@material-ui/core/Button';
 
-function Sudoko() {
+function Sudoku() {
     const [board, setBoard] = useState(() => Puzzle.generatePuzzle());
     const [correctTileCount, setCorrectTileCount] = useState(0);
     const [solved, setSolved] = useState(() => Puzzle.solvePuzzle(board));
@@ -96,4 +96,4 @@ function Sudoko() {
     )
 }
 
-export default Sudoko
+export default Sudoku
