@@ -11,7 +11,7 @@ Suduko board to be used structure: {tile: [
     col: 0,
     value: 1,
     readonly: true
-    valid: true | false | empty true if value is valid, false if it's not valid and empty if the field is empty
+    valid: true | false | empty true if value is valid, false if it's not valid and empty
   }
 ]}
 */
@@ -36,7 +36,9 @@ const Puzzle = {
             board.push(tile)
           }
         }
+        // console.log(board)
         return board;
+        // solvepuzzle(puzzle)
       },
     
     

@@ -7,21 +7,37 @@ import Button from '@material-ui/core/Button';
 function Sudoko() {
 
     const [board, setBoard] = useState(() => Puzzle.generatePuzzle());
-    const [solved] = useState(() => Puzzle.solvePuzzle(board));
-    
-    // Change tile value
+    const [solved, setSolved] = useState(() => Puzzle.solvePuzzle(board));
+
     const changeTile = (index, value) =>{
         try{
             value = parseInt(value);
+            setBoard(
+                board.map((tile) => 
+                    tile.index === index ? {...tile, value: value, valid: 'empty' }: tile
+                )
+    
+            )
         }
         catch(e){
             console.log(e)
         }
-        setBoard(
-            board.map((tile) => 
-                tile.index === index ? {...tile, value: value, valid: 'empty' }: tile
-            )
+    }
 
+    const restart = () => {
+        let newBoard = Puzzle.generatePuzzle();
+        setBoard(
+            board => board = newBoard
+        )
+        setSolved(
+           solved => solved =[...Puzzle.solvePuzzle(newBoard)] 
+        )
+    }
+
+    const clearBoard = () => 
+    {
+        setBoard(
+            board => board.map(tile =>  !tile.readonly ? {...tile, value: 0, valid: 'empty'}: tile)
         )
     }
 
@@ -46,8 +62,11 @@ function Sudoko() {
     return (
             <div className="sudoku">
                         <Board board={board} changeTile={changeTile}/>
-                        <div style={{textAlign: "center"}}>
-                            <Button onClick={validate}>Validate</Button><br></br>
+                        <div className="controls">
+                            <Button onClick={validate}  variant="contained" color="primary">Check Progress</Button>
+                            <Button variant="contained" color="primary">Pause</Button>
+                            <Button variant="contained" onClick={clearBoard} color="primary">Clear</Button>
+                            <Button variant="contained" onClick={restart} color="primary">Restart</Button>
                         </div>
             </div>
     )

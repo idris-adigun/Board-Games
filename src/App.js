@@ -10,10 +10,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 function App() {
   const [sidebar, setSidebar] = useState(true);
 
+  //Automatically toggle siebar base on screen size
   const screenSize = window.matchMedia('(max-width: 800px)');
   screenSize.addEventListener('change', (screen) => {
     const isMobile = screen.matches;
-    isMobile ? setSidebar(previousState => previousState = false) : setSidebar(previousState => previousState = true)
+    isMobile ? setSidebar(previousState => {previousState = false}) : setSidebar(previousState => {previousState = true})
   });
 
   const toggleSidebar = () => {
@@ -33,7 +34,9 @@ function App() {
         <div className={sidebar ? "show-sidebar" : "hide-sidebar"}>
           <Sidebar/>
         </div>
-        <Sudoko/>
+        <div className="sudoku">
+          <Sudoko/>
+        </div>
       </div>
     </div>
   );
