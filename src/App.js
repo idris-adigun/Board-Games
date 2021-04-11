@@ -1,23 +1,37 @@
 import './App.css';
-import React, { useState, lazy, Suspense } from 'react';
-// import Sudoku from './Sudoku/Sudoku';
-// import Home from './Home/Home';
-// import Hangman from './Hangman/Hangman'
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Sidebar from './components/Sidebar';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Header from './components/Header'
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+// Themes
+import { ThemeProvider } from "styled-components";
+import WebFont from 'webfontloader';
+import { GlobalStyles } from './theme/GlobalStyles';
+import {useTheme} from './theme/useTheme';
 
-
-
+// LAZY load component
 const Home = lazy(() => import('./Home/Home'));
 const Hangman = lazy(() => import('./Hangman/Hangman'));
 const Sudoku = lazy(() => import('./Sudoku/Sudoku'));
 
+
 function App() {
+  
   const [sidebar, setSidebar] = useState(true);
+  const {theme, themeLoaded, getFonts} = useTheme();
+  const [selectedTheme, setSelectedTheme] = useState(theme);
+  
+  useEffect(() => {
+    setSelectedTheme(theme);
+   }, [themeLoaded]);
+
+   useEffect(() => {
+    WebFont.load({
+      google: {
+        families: getFonts()
+      }
+    });
+  });
 
   //Automatically toggle siebar base on screen size
   const screenSize = window.matchMedia('(max-width: 800px)');
@@ -29,28 +43,30 @@ function App() {
   const toggleSidebar = () => {
         setSidebar(previousState => previousState = !previousState)
   }
+  const changeTheme = (newtheme) =>
+  {
+    setSelectedTheme(theme => theme = newtheme)
+  }
   return (
     <Router>
       <Suspense fallback="Loading...">
-        <div className="App">
-          <AppBar position="static">
-            <Toolbar> 
-              <IconButton edge="start" color="inherit" aria-label="menu"  onClick={toggleSidebar}>
-                  <MenuIcon/>
-                </IconButton>
-            </Toolbar>
-          </AppBar>
-          <div className="container">
-            <div className={sidebar ? "show-sidebar" : "hide-sidebar"}>
-              <Sidebar/>
+        
+     <ThemeProvider theme={ selectedTheme }>
+        <GlobalStyles/>
+          <div  style={{fontFamily: selectedTheme.font}}>
+              <Header sidebar={toggleSidebar} changeTheme={changeTheme}/>
+              <div className="container">
+                <div className={sidebar ? "show-sidebar" : "hide-sidebar"}>
+                  <Sidebar/>
+                </div>
+                <div className="game">
+                  <Route path="/" exact component={Home}></Route>
+                  <Route path="/Sudoku" component={Sudoku}></Route>
+                  <Route path="/Hangman" component={Hangman}></Route>
+                </div>
+              </div>
             </div>
-            <div className="game">
-              <Route path="/" exact component={Home}></Route>
-              <Route path="/Sudoku" component={Sudoku}></Route>
-              <Route path="/Hangman" component={Hangman}></Route>
-            </div>
-          </div>
-        </div>
+      </ThemeProvider>
       </Suspense>
     </Router>
   );

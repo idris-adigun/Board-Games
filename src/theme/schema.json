@@ -1,0 +1,38 @@
+{
+    "data" : {
+      "light" : {
+        "id": "T_001",
+        "name": "Light",
+        "colors": {
+          "body": "#FFFFFF",
+          "text": "#000000",
+          "button": {
+            "text": "#e6eed6",
+            "background": "#6d6d6d"
+          },
+          "link": {
+            "text": "teal",
+            "opacity": 1
+          }
+        },
+        "font": "Montserrat"
+      },
+      "dark" : {
+        "id": "T_007",
+        "name": "Dark",
+        "colors": {
+          "body": "#1f2929",
+          "text": "#e6eed6",
+          "button": {
+            "text": "#e6eed6",
+            "background": "#6d6d6d"
+          },
+          "link": {
+            "text": "#6d6d6d",
+            "opacity": 0.8
+          }
+        },
+        "font": "Montserrat"
+      }
+    }
+  }

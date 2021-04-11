@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './sudoku.css';
-import Timer from './components/Timer';
+// import Timer from './components/Timer';
 import Board from './components/Board';
 import Puzzle from './puzzle';
 import Button from '@material-ui/core/Button';
@@ -9,7 +9,7 @@ function Sudoku() {
     const [board, setBoard] = useState(() => Puzzle.generatePuzzle());
     const [correctTileCount, setCorrectTileCount] = useState(0);
     const [solved, setSolved] = useState(() => Puzzle.solvePuzzle(board));
-    const [time, setTime] = useState(0)
+    // const [time, setTime] = useState(0)
 
     // useEffect(() => {
     //         setCorrectTileCount(correctTileCount => correctTileCount = correctTileCount)
@@ -74,13 +74,13 @@ function Sudoku() {
         });
         setCorrectTileCount(prevCount => prevCount = count)
         if(correctTileCount === 25){
-            console.log('Game Won in', time)
+            console.log('Game Won in')
         }
     }
-    const getTimer = (seonds) =>{
-        setTime(time => time = seonds)
-        // console.log(time)
-    }
+    // const getTimer = (seonds) =>{
+    //     setTime(time => time = seonds)
+    //     // console.log(time)
+    // }
     
     return (
             <div className="sudoku">
