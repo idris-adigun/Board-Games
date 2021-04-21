@@ -9,20 +9,13 @@ function Sudoku() {
     const [board, setBoard] = useState(() => Puzzle.generatePuzzle());
     const [correctTileCount, setCorrectTileCount] = useState(0);
     const [solved, setSolved] = useState(() => Puzzle.solvePuzzle(board));
-    // const [time, setTime] = useState(0)
-
-    // useEffect(() => {
-    //         setCorrectTileCount(correctTileCount => correctTileCount = correctTileCount)
-    // }, [correctTileCount]);
     
     const changeTile = (index, value) =>{
         try{
             value = parseInt(value);
             setBoard(
                 board.map((tile) => 
-                    tile.index === index ? {...tile, value: value, valid: 'empty' }: tile
-                )
-    
+                    tile.index === index ? {...tile, value: value, valid: 'empty' }: tile)
             )
         }
         catch(e){
@@ -32,12 +25,8 @@ function Sudoku() {
 
     const restart = () => {
         let newBoard = Puzzle.generatePuzzle();
-        setBoard(
-            board => board = newBoard
-        )
-        setSolved(
-           solved => solved =[...Puzzle.solvePuzzle(newBoard)] 
-        )
+        setBoard(board => board = newBoard)
+        setSolved(solved => solved =[...Puzzle.solvePuzzle(newBoard)])
         //restart time
     }
 
